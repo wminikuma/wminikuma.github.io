@@ -1,6 +1,6 @@
 ---
 title: ArrayList는 무엇인가? 
-author: minikuma
+author: Jeon Jihoon
 date: 2023-03-15 23:10:06:00 +0800
 categories: [IT, Java]
 tags: [java, arraylist]
