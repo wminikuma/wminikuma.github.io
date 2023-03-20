@@ -209,4 +209,4 @@ public class MyArrayList<E> {
 ---
 * https://daehwann.wordpress.com/2016/08/26/java-arraylist/    
 * https://docs.oracle.com/javase/8/docs/api/ 
-* 코딩 인터뷰 완전 분석
+* 코딩 인터뷰 완전 분석, 게리 라만 맥도웰 저
