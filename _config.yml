@@ -176,7 +176,7 @@ compress_html:
   profile: false
   blanklines: false
   ignore:
-    envs: []
+    envs: [development]
 
 exclude:
   - "*.gem"
@@ -188,9 +188,6 @@ exclude:
   - rollup.config.js
   - node_modules
   - package*.json
-  - docs
-  - Gemfile
-  - Gemfile.lock
 
 jekyll-archives:
   enabled: [categories, tags]

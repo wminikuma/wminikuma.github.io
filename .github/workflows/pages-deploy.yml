@@ -2,6 +2,7 @@ name: "Build and Deploy"
 on:
   push:
     branches:
+      - main
       - master
     paths-ignore:
       - .gitignore
@@ -41,11 +42,11 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.5   # reads from a '.ruby-version' or '.tools-version' file if 'ruby-version' is omitted
-          bundler-cache: false
+          ruby-version: 3   # reads from a '.ruby-version' or '.tools-version' file if 'ruby-version' is omitted
+          bundler-cache: true
 
       - name: Build site
-        run: gem update bundler;bundle install;bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
+        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: "production"
 
