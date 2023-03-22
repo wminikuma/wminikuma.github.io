@@ -1,10 +1,8 @@
 ---
-title: ArrayList는 무엇인가? 
-author: Jeon Jihoon
-date: 2023-03-15 23:10:06:00 +0800
+title: "ArrayList는 무엇인가?"
+date: 2023-03-22 11:46:00 +0900
 categories: [IT, Java]
-tags: [java, arraylist]
-render_with_liquid: false
+tags: [java, arraylist]     # TAG names should always be lowercase
 ---
 
 이번 포스팅은 Java에서 많이 사용하는 자료구조 중에 하나인 ```ArrayList```에 대해 알아보려고 한다.
