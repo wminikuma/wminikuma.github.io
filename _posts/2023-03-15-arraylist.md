@@ -1,5 +1,5 @@
 ---
-title: "ArrayList는 무엇인가?"
+title: "[Java] ArrayList 살펴보기"
 date: 2023-03-22 11:46:00 +0900
 categories: [IT, Java]
 tags: [java, arraylist]     # TAG names should always be lowercase
@@ -26,20 +26,21 @@ List list = Collections.synchronizedList(new ArrayList(...));
 
 ## **가변 크기 배열**
 ---
-API 문서에 보면 **가변 크기 배열**이라는 설명이 나오는 데 몇가지 요약을 해 보면 아래와 같다.
+```ArrayList``` 에서 말하는 내용을 간단하게 적어보면 아래와 같다.
 
-* 배열의 사이즈를 조정할 수 있는 ```List``` 인터페이스의 구현체
-* 배열의 Element를 저장하기 위한 Capacity가 존재하며 크기는 항상 리스트의 크기보다 크다.
-* Element가 ```ArrayList```에 추가되면 Capacity가 자동으로 증가
-* 증가하는 배열 크기는 분할상환시간과 관련이 있음
+* 배열의 사이즈를 조정할 수 있는 ```List``` 인터페이스의 구현체 중 하나이다.
+* 배열의 Element 를 저장하기 위한 Capacity가 존재하며 크기는 항상 리스트의 크기보다 크다.
+* Element를 ```ArrayList```에 추가할 때 Capacity가 자동으로 조정된다.
+* 필요에 따라 크기를 변화할 수 있으면서도 ```O(1)``` 의 접근시간을 유지한다.
+* 배열의 크기를 증가하는 비용은 상환입력시간 기준으로 ```O(1)```이다.
 
-여기서 처음을 생각해 봐야 할 내용은 배열 사이즈가 자동으로 증가된다는 점이다.  
+여기서는 배열의 크기가 변화한다는 사실에 주목해 보자. 
 
 ```java
 private static final int DEFAULT_CAPACITY = 10;
 ```
 
-JDK 1.8 기준으로 ```ArrayList``` 배열의 기본 사이즈는 10으로 세팅되어 있다. 만약 배열의 기본 사이즈보다 더 커지는 경우에는 어떻게 될까? 아래 코드 일부를 살펴보자.
+JDK 1.8 기준으로 ```ArrayList``` 배열의 기본 사이즈는 10으로 세팅되어 있다. 만약 배열의 기본 사이즈보다 더 커지는 경우에는 어떻게 될까? ```ArrayList``` 설명에 따르면 크기가 자동으로 증가할 것임을 알 수있다. 그렇다면 이번에는 어떤 방식으로 증가할까? 에 대한 의문이 든다. 아래의 ```grow()``` 메서드를 살펴보자.
 
 ```java
 /**
@@ -61,9 +62,9 @@ private void grow(int minCapacity) {
 }
 ```    
 
-위 ```grow``` 메서드를 보게 되면 해당 메서드가 자동 증가와 관련이 있음을 알 수 있다. 자동 증가 수치는  ```int newCapacity = oldCapacit+(oldCapacity >> 1)``` 이 부분을 보면 알 수 있게 되는데, 새로운 배열의 크기는 예전 배열의 크기를 오른쪽으로 1만큼 이동한 수를 더해서 만들게 된다.
+위 ```grow()``` 메서드의 자동 증가 방법은  ```int newCapacity = oldCapacit+(oldCapacity >> 1)``` 부분을 보면 알 수 있는데, 새로운 배열의 크기는 예전 배열의 크기를 오른쪽으로 1 만큼 이동한 수만큼 더해서 만들고 있음을 알 수 있다. 
 
-예를 들어 기본 배열 크기보다 더 큰 배열이 필요하다고 가정해 보면, 새로운 배열은 15의 크기만큼 할당될 것이라는 걸 알 수 있다.
+예를 들어 기본 배열 크기(10)보다 더 큰 배열이 필요하다고 가정해 보면, 새로운 배열은 15의 크기만큼 할당될 것이라는 걸 알 수 있다.
 
 ```java
 int newCapacity = oldCapacit+(oldCapacity >> 1)
@@ -74,14 +75,17 @@ int newCapacity = oldCapacit+(oldCapacity >> 1)
 
 일반화를 해 보면 ```int newCapacity = oldCapacit+(oldCapacity / 2)``` 로 나타낼 수 있다. 참고로 자동 증가된 배열은 ```Arrays.copyOf``` 을 보게 되면 기본 배열을 복사한 새로운 배열로 생성된다.    
 
+
 ## **Multiple Threading**
 ---
-API 문서를 참고해 보면 ```ArrayList```는 Syncronized 가 아니다. 만약 멀티스레드 환경에서 ```ArrayList``` 인스턴스를 동시에 접근하거나 이 중 하나의 스레드에서 리스트의 구조를 수정하는 경우에는 외부 동기화 과정이 필요하다. 여기서 말하는 리스트의 구조를 변경하는 거는 element 의 추가, 삭제, 내부 배열 크기 수정, 값의 변경을 의미하지 않는다.    
-외부 동기화는 일반적으로 ```Object```를 동기화하는 방식으로 해결할 수 있다. ```List``` 를 ```Collections.synchronizedList```와 같은 메서드로 Wrapping 하는 방법도 있다.
+API 문서를 참고해 보면 ```ArrayList```는 Syncronized 가 아니다. 만약 멀티스레드 환경에서 ```ArrayList``` 인스턴스를 동시에 접근하거나 이 중 하나의 스레드에서 리스트의 구조를 수정하는 경우에는 외부 동기화 과정이 필요하다. 여기서 말하는 리스트의 구조를 변경하는 것은 element 의 추가, 삭제, 내부 배열 크기 수정, 값의 변경을 의미하지 않는다. 멀티 스레드에 안전하게 하기 위해서는 외부 동기화가 필요한데, 외부 동기화란 간단히 말해 사용자가 객체를 직접 동기화하는 방식으로 생각하면 된다.     
+
+만약 외부 동기화를 사용자가 직접하지 않는 방식도 있든데, ```List``` 를 ```Collections.synchronizedList```와 같은 메서드로 Wrapping 하는 방법도 있다.
+
 
 ## **Fail-Fast**
 ---
-```ArrayList``` 클래스도 ```Collection``` 클래스의 특징을 모두 가지고 있다. ```Collection``` 객체는 저장된 객체들에 대한 순차적 접근을 허용하는데 순차적인 접근 시, ```Collection``` 객체의 구조적인 변경, 예를들어 객체의 추가 혹은 삭제와 같은 일이 발생하게 되면 접근 실패(```ConcurrentModificationException```) 예외가 발생하게 된다.
+```ArrayList``` 클래스도 ```Collection``` 클래스의 특징을 모두 가지고 있다. ```Collection``` 객체는 저장된 객체들에 대한 순차적 접근을 허용하는데 순차적인 접근 시, ```Collection``` 객체의 구조적인 변경, 예를 들어 객체의 추가 혹은 삭제와 같은 일이 발생하게 되면 접근 실패(```ConcurrentModificationException```) 예외가 발생하게 된다.
 
 ```java
 public class FailFast {
@@ -97,7 +101,7 @@ public class FailFast {
 }
 ```
 
-## **My ArrayList 만들기**
+## **직접 ArrayList 만들어 보기**
 ---
 아래 몇가지 기능을 정의하여 직접 ```ArrayList```만들어 보려고 한다. 기능은 JDK 8 스펙을 참고 하였다.  
 
@@ -207,6 +211,6 @@ public class MyArrayList<E> {
 
 ## **References**
 ---
-* https://daehwann.wordpress.com/2016/08/26/java-arraylist/    
-* https://docs.oracle.com/javase/8/docs/api/ 
+* [https://daehwann.wordpress.com/2016/08/26/java-arraylist/](https://daehwann.wordpress.com/2016/08/26/java-arraylist/)
+* [https://docs.oracle.com/javase/8/docs/api/](https://docs.oracle.com/javase/8/docs/api/)
 * 코딩 인터뷰 완전 분석, 게리 라만 맥도웰 저
