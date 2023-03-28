@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wminikuma.github.io/sitemap.xml
