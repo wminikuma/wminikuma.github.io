@@ -5,10 +5,10 @@ categories: [IT, Java]
 tags: [java, nestedclass]     # TAG names should always be lowercase
 ---
 
-이번 포스팅은 Nested Class에 대해 알려보려고 한다.      
+이번 포스팅은 Nested Class에 대해 알려보려고 합니다. Oracle JDK 8 기준 Nested Classes 문서를 번역한 글입니다.
 
 
-### 중첩 클래스는 무엇인가?
+### **중첩 클래스는 무엇인가?**
 ---
 자바에서는 클래스 내부에 클래스를 정의할 수 있다. 이것을 중첩 클래스 (```Nested Class```)라고 부른다.  아래는 중첩 클래스의 예시이다.    
 
@@ -21,7 +21,7 @@ class Outer {
 }
 ```    
 
-> **(전문용어)** 중첩 클래는 ```non-static``` 과 ```static``` 으로 구분할 수 있다. ```non-static``` 인 경우는 내부 클래스 (```Inner Class```) 라고 불리기도 한다. 반면에 static 같은 경우는 정적 중첩 클래스 (```Static Inner Class```) 라고 불린다.
+> **(전문용어)** 중첩 클래는 ```non-static``` 과 ```static``` 으로 구분할 수 있다. ```non-static``` 인 경우는 내부 클래스 (```Inner Class```) 라고 불리기도 한다. 반면에 ```static``` 같은 경우는 정적 중첩 클래스 (```Static Inner Class```) 라고 불린다.
 {: .prompt-info }     
 
 
@@ -41,7 +41,7 @@ class OuterClass {
 중첩 클래스는 외부 클래스에 의해 둘러싸인 클래스이고 외부 클래스의 멤버로 동작한다. ```non-static``` 과 ```static``` 에 따라 조금은 다르게 동작한다. ```non-static``` 중첩 클래스 (내부 클래스) 경우에는 외부 클래스의 멤버에 접근이 가능하다. 설령 ```private``` 으로 선언된 멤버라고 해도 접근이 가능하다. 반면에 ```static``` 중첩 클래스는 외부 클래스의 멤버에 접근 할 수 없다. 참고로 외부 클래스의 멤버로 중첩 클래스는 ```private```, ```public```, ```protected``` 혹은  ```package private``` 으로 선언할 수 있다. (외부 클래스는 자체는 ```public``` 혹은 ```package private``` 으로 선언 가능)    
 
 
-### 왜 중첩 클래스를 사용하는가?     
+### **왜 중첩 클래스를 사용하는가?**  
 ---
 중첩 클래스를 사용하는 이유는 아래와 같다.
 
@@ -53,7 +53,7 @@ class OuterClass {
 * 더 읽기 쉽고 유지보수가 좋은 코드를 만들 수 있다.
   최상위 클래스 내부에 중첩 클래스를 만들게 되면 연관성 있는 코드를 한곳에 두게 되어 코드의 사용성이 증가하게 된다.
 
-### 내부 클래스
+### **내부 클래스**
 ---   
 
 객체의 인스턴스 메서드 혹은 필드와 마찬가지로 내부 중첩 클래스는 감싸고 있는 외부 클래스의 인스턴스와 연결되어 외부 객체의 메서드 및 필드에 접근할 수 있지만 내부 클래스는 외부 클래스와 연결되어 있어 정적 멤버 (```static```) 를 정의할 수 없다. 참고로 JDK 16 + 버전에서는 허용되는 것으로 확인된다.     
@@ -93,12 +93,13 @@ OuterClass outerObject = new OuterClass();
 OuterClass.InnerClass innerObject = outerObject.new InnerClass();
 ```     
 
-### Static Nested Classes
+### **Static Nested Classes**
 ---
 
 내부 클래스와 마찬가지로 정적 중첩 클래스도 외부 클래스외 연결되어 있다. 다만 정적 메서드와처럼 정적 중첩 클래스도 인스턴스 변수나 메서드를 직접 참조할 수 없고 객체 참조를 통해서만 접근이 가능하다.      
 
 >**(Note)** 정적 중첩 클래스는 다른 최상위 클래스와 마찬가지로 외부 클래스 혹은 다른 클래스와 연결된다. 사실 정적 중첩 클래스는 동작으로 봤을 때 최상위 클래스라고 볼 수 있다. 
+{: .prompt-info } 
 
 다른 최상위 클래스와 마찬가지로 정적 중첩 클래스도 인스턴스를 아래와 같이 만들 수 있다.    
 
@@ -106,7 +107,7 @@ OuterClass.InnerClass innerObject = outerObject.new InnerClass();
 StaticNestedClass staticNestedObject = new StaticNestedClass();
 ```    
 
-### Inner Class, Nested Static Class 예제   
+### **Inner Class, Nested Static Class 예제**   
 ---
 
 ```OuterClass.java``` 를 아래와 같이 구성하자.      
@@ -154,7 +155,7 @@ public class OuterClass {
 }
 ```     
 
-TopLevelClass.java
+```TopLevelClass.java```
 
 ```java
 public class TopLevelClass {
@@ -190,7 +191,7 @@ Outer field
 Static outer field
 ```
 
-### Shadowing    
+### **Shadowing**    
 ---
 
 만약 특정 범위 내부(내부 클래스 혹은 메서드)에서 선언된 타입들 (멤버 변수 혹은 매개변수 이름)이 외부 범위에 선언된 타입들과 이름이 같은 경우에 외부에 선언된 이름으로 대체된다. 이것을 Shadowing이라고 한다. 
@@ -225,26 +226,26 @@ this.x = 1
 ShadowTest.this.x = 0
 ```      
 
-(예제 설명)   
+**(예제 설명)**   
 예제에서는 ```x``` 라는 이름의 3가지 변수를 정의한다. 각각 ```ShadowTest``` 클래스 멤버 변수, ```FirstLevel``` 내부 클래스의 멤버 변수, ```methodInFirstLevel``` 의 매개변수로 선언된 변수 입니다. 내부 클래스의 메서드인 ```methodInFirstLevel``` 의 매개변수로 정의된 변수 ```x``` 는 내부 클래스의 변수를 Shadowing 한다. 내부 클래스인 ```FirstLevel``` 의 멤버 변수인 ```x``` 를 참조하려면 ```this``` 키워드가 필요합니다.     
 
-```this``` 키워드로 내부 클래스인 ```FirstLevel``` 의 멤버 변수를 접근
+(1) ```this``` 키워드로 내부 클래스인 ```FirstLevel``` 의 멤버 변수를 접근
 ```java
 System.out.println("this.x = " + this.x);
 ```    
 
-상위 레벨 클래스의 멤버 변수를 참조해야 하는 경우 (해당 변수가 속한 클래스 명 작성)    
+(2) 상위 레벨 클래스의 멤버 변수를 참조해야 하는 경우 (해당 변수가 속한 클래스 명 작성)    
 
 ```java
 System.out.println("ShadowTest.this.x = " + ShadowTest.this.x);
 ```      
 
-### Serialization   
+### **Serialization**   
 --- 
 
 로컬 및 익명 클래스를 포함한 내부 클래스의 직렬화는 권장하지 않는다. 
 
 
-### References    
+### **References**    
 ---
-[Oracle JDK 8 Reference] https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
+[Oracle JDK 8 Reference Nested Classes](https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html)
