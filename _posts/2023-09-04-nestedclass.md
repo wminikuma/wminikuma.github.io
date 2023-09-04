@@ -155,7 +155,8 @@ public class OuterClass {
 }
 ```     
 
-```TopLevelClass.java```
+```TopLevelClass.java``` 코드이다.    
+
 
 ```java
 public class TopLevelClass {
@@ -168,7 +169,7 @@ public class TopLevelClass {
         System.out.println(OuterClass.staticOuterField);
     }  
 }
-```
+```      
 
 정적 중첩 클래스 ```StaticNestedClass``` 는 둘러싸고 있는 외부 클래스인 ```OuterClass``` 의 인스턴스 멤버인 ```outField``` 에 직접 접근할 수 없다. (인스턴스 멤버에 접근하기 위해서는 인스턴스의 연결이 필요) 유사하게 최상위 클래스인 ```TopLevelClass``` 도 ```outField``` 에 직접 접근할 수 없다.
 
