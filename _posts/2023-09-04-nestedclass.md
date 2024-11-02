@@ -5,7 +5,7 @@ categories: [IT, Java]
 tags: [java, nestedclass]     # TAG names should always be lowercase
 sitemap :
   changefreq : weekly
-  priority : 1.0
+  priority : 2.0
 ---
 
 이번 포스팅은 Nested Class에 대해 알려보려고 합니다. Oracle JDK 8 기준 Nested Classes 문서를 번역한 글입니다.
